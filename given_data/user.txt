@@ -1,0 +1,20 @@
+user000001	Ken Chan	Flat A, 20/F ,5 Robinson Road, Mid Levels, Hong Kong Island, Hong Kong	1
+user000002	Patrick Lee	Flat 2011, Ever Gain Bldg., 2 On Sum Street, Fotan, Shatin, N.T., Hong Kong	2
+user000003	Raymond Wong	Flat A, 30/F, 510 Queen's Road West, Western District, Hong Kong	3
+user000004	Rose Li	Flat 2103, 58 Boundary Street, Mongkok, Kowloon	4
+user000005	Boris Lie	7/F, Block A, 30-31, Nathan Road, Tsim Sha Tsui, Kowloon, Hong Kong	5
+user000006	Danny Yip	20 On Muk Street, Shatin N.T. Hong Kong	6
+user000007	Sara Ng	Flat 5, 2/F, 38 Nathan Rd, Kowloon, Hong Kong	7
+user000008	Steve Lai	Flat 1013, Block 5,  Man Fuk Road, Kowloon, Hong Kong	1
+user000009	Steven Yeung	30/F, 90 Yee Wo Street, Causeway Bay, Hong Kong	2
+user000010	Table Ho	Flat C, 12/F, 200 Electric Road, North Point, Hong Kong	3
+user000011	David Chan	Room 218, Lee Shiu Pui Hall, Chung Chi College, Shatin, N.T., Hong Kong	4
+user000012	Ramond Law	Room 218, Lee Shiu Pui Hall, Chung Chi College, Shatin, N.T., Hong Kong	4
+user000013	Bonnie Fu	Flat A, 30/F, Happy Garden, TaiPo Market, N.T., Hong Kong	2
+user000014	Kim Tang	10, Pingan Tsuen, Daidi Jen, Jungshan, China	1
+user000015	David Chan	Flat C, 11/F, Win Bldg., 3 Curely Street, Taiwai, Hong Kong	1
+user000016	Goria Chu	Flat 111, Block 1, Number Road, Lantau Island, Hong Kong	2
+user000017	Janice Man	Flat E, 8/F, ABC House, Letter Estate, SheungShui, Hong Kong	1
+user000018	Angel Tong	Room 3210, DEF House, Letter Estate, SheungShui, Hong Kong	4
+user000019	Teresa Fu	Flat F, 15/F, Cow Bldg., Fortress Street, KoonTong, Hong Kong	1
+user000020	Alice Wong	Flat G, 36/F, 24, Lady Street, Mongkok, Kong Kong	6

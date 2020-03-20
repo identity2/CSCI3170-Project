@@ -1,0 +1,10 @@
+QA762011	1	Database system concepts	Abraham Silberschatz,Henry F. Korth,S. Sudarshan	01/01/2011
+QA762005	3	Database system concepts	Avi Silberschatz,Hank Korth,S. Sudarshan	15/06/2005
+G3632000	5	Database system implementation	Hector Garcia-Molina,Jeffrey D. Ullman,Jennifer Widom	29/04/2000
+QA76D3L5	4	A PROLOG database system	Deyi Li	20/10/1984
+G3653200	8	DB system The complete book	Hector Garcia-Molina,Jeffrey D. Ullman,Jennifer Widom	27/07/2009
+D3184199	2	OO database system	Hiroshi Ishikawa	21/02/1993
+Q335L520	3	AI with uncertainty	Deyi Li,Yi Du	30/07/2008
+59M63199	1	Mobile computing	Henry F. Korth,Tomasz Imielinski	04/03/1996
+5S661996	3	Time-constrained transaction	Nandit R. Soparkar,Henry F. Korth,Abraham Silberschatz	28/10/1996
+S5583200	6	Operating system concepts	Abraham Silberschatz,Peter Baer Galvin,Greg Gagne	14/12/2009
