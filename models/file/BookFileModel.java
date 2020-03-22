@@ -1,7 +1,9 @@
 package models.file;
 
-import java.sql.Connection;
+import java.sql.*;
+import java.util.Calendar;
 
+import models.DateConv;
 import models.db.*;
 
 public class BookFileModel implements FileModelInterface {
@@ -9,7 +11,7 @@ public class BookFileModel implements FileModelInterface {
     private int numOfCopies;
     private String title;
     private String[] authors;
-    private String dateOfPublication;
+    private Calendar dateOfPublication;
 
     public void parseFromLine(String inputLine) {
         String[] splitted = inputLine.split("\t");
@@ -17,7 +19,7 @@ public class BookFileModel implements FileModelInterface {
         this.numOfCopies = Integer.parseInt(splitted[1]);
         this.title = splitted[2];
         this.authors = splitted[3].split(",");
-        this.dateOfPublication = splitted[4];
+        this.dateOfPublication = DateConv.strToCal(splitted[4]);
     }
 
     public void saveToDatabase(Connection conn) {

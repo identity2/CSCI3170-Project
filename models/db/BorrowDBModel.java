@@ -1,15 +1,16 @@
 package models.db;
 
 import java.sql.*;
+import java.util.Calendar;
 
 public class BorrowDBModel {
     private String libuid;
     private String callnum;
     private int copynum;
-    private String checkout;
-    private String ret;
+    private Calendar checkout;
+    private Calendar ret;
 
-    public BorrowDBModel(String libuid, String callnum, int copynum, String checkout, String ret) {
+    public BorrowDBModel(String libuid, String callnum, int copynum, Calendar checkout, Calendar ret) {
         this.libuid = libuid;
         this.callnum = callnum;
         this.copynum = copynum;
@@ -23,13 +24,13 @@ public class BorrowDBModel {
             stmt.setString(1, libuid);
             stmt.setString(2, callnum);
             stmt.setInt(3, copynum);
-            stmt.setString(4, checkout);
+            stmt.setDate(4, new Date(checkout.getTimeInMillis()));
 
             // Return date could be null.
-            if (ret == "null") {
-                stmt.setNull(5, Types.CHAR);
+            if (ret == null) {
+                stmt.setNull(5, Types.DATE);
             } else {
-                stmt.setString(5, ret);
+                stmt.setDate(5, new Date(ret.getTimeInMillis()));
             }
 
             stmt.execute();

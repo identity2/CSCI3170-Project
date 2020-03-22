@@ -76,12 +76,13 @@ public class AdminCLI implements CLIInterface {
             db.loadDataFromFiles(folderPath);
             System.out.println("Done! Data is inputted to the database!\n");
         } catch (Exception e) {
-
+            System.out.println("[Error] Cannot load data from file.\n");
         }
     }
 
     private void optShowNumOfRecords() {
-
+        System.out.println("Number of records in each table:");
+        db.countAndPrintAllRecordsInTables();
     }
 }
 
