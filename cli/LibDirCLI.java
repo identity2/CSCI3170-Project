@@ -34,6 +34,14 @@ public class LibDirCLI implements CLIInterface {
     }
 
     private void optListAllUnreturned() {
-        // TODO.
+        Calendar startDate, endDate;
+
+        System.out.printf("Type in the starting date [dd/mm/yyyy]: ");
+        startDate = DateConv.strToCal(sc.next());
+        System.out.printf("Type in the ending date [dd/mm/yyyy]: ");
+        endDate = DateConv.strToCal(sc.next());
+        System.out.println();
+
+        db.listAllUnreturnedBooks(startDate, endDate);
     }
 }

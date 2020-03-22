@@ -36,10 +36,30 @@ public class LibrarianCLI implements CLIInterface {
     }
 
     private void optBookBorrowing() {
-        // TODO
+        String userID, callnum;
+        int copynum;
+        System.out.printf("Enter The User ID: ");
+        userID = sc.next();
+        System.out.printf("Enter The Call Number: ");
+        callnum = sc.next();
+        System.out.printf("Enter The Copy Number: ");
+        copynum = sc.nextInt();
+        System.out.println();
+
+        db.borrowBook(userID, callnum, copynum);
     }
 
     private void optBookReturning() {
-        // TODO
+        String userID, callnum;
+        int copynum;
+        System.out.printf("Enter The User ID: ");
+        userID = sc.next();
+        System.out.printf("Enter The Call Number: ");
+        callnum = sc.next();
+        System.out.printf("Enter The Copy Number: ");
+        copynum = sc.nextInt();
+        System.out.println();
+
+        db.returnBook(userID, callnum, copynum);
     }
 }

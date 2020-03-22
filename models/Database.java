@@ -2,7 +2,8 @@ package models;
 
 import java.sql.*;
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 import models.file.*;
 
 public class Database {
@@ -217,6 +218,115 @@ public class Database {
             }
         } catch (SQLException e) {
             System.out.println("[Error] Failed to perform query.");
+        }
+    }
+
+    // ====== Librarian Operations ======
+    public void borrowBook(String userID, String callnum, int copynum) {
+        try {
+            // Check that this book exists.
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM copy WHERE callnum = ? AND copynum = ?");
+            stmt.setString(1, callnum);
+            stmt.setInt(2, copynum);
+            if (!stmt.executeQuery().next()) {
+                System.out.println("[Error] No such book exists. Please check that the CallNum and CopyNum are correct and try again.\n");
+                return;
+            }
+
+            // Check that this user exists.
+            stmt = conn.prepareStatement("SELECT * FROM libuser WHERE libuid = ?");
+            stmt.setString(1, userID);
+            if (!stmt.executeQuery().next()) {
+                System.out.println("[Error] No such user exists. Please check that the user ID is correct and try again.\n");
+                return;
+            }
+
+            // Check that this book isn't checked out.
+            stmt = conn.prepareStatement("SELECT * FROM borrow WHERE callnum = ? AND copynum = ? AND ret IS NULL");
+            stmt.setString(1, callnum);
+            stmt.setInt(2, copynum);
+            if (stmt.executeQuery().next()) {
+                System.out.println("[Error] This book is currently checked out.\n");
+                return;
+            }
+
+            // Insert a new checkout record.
+            stmt = conn.prepareStatement("INSERT INTO borrow (libuid, callnum, copynum, checkout, ret) VALUES (?, ?, ?, ?, NULL)");
+            stmt.setString(1, userID);
+            stmt.setString(2, callnum);
+            stmt.setInt(3, copynum);
+            stmt.setDate(4, new Date(Calendar.getInstance().getTimeInMillis()));
+            stmt.execute();
+            System.out.println("Book borrowing performed successfully!!!\n");
+        } catch (SQLException e) {
+            System.out.println("[Error] Failed to borrow the book.\n");
+        }
+    }
+
+    public void returnBook(String userID, String callnum, int copynum) {
+        try {
+            // Check that this book exists.
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM copy WHERE callnum = ? AND copynum = ?");
+            stmt.setString(1, callnum);
+            stmt.setInt(2, copynum);
+            if (!stmt.executeQuery().next()) {
+                System.out.println("[Error] No such book exists. Please check that the CallNum and CopyNum are correct and try again.\n");
+                return;
+            }
+
+            // Check that this user exists.
+            stmt = conn.prepareStatement("SELECT * FROM libuser WHERE libuid = ?");
+            stmt.setString(1, userID);
+            if (!stmt.executeQuery().next()) {
+                System.out.println("[Error] No such user exists. Please check that the user ID is correct and try again.\n");
+                return;
+            }
+
+            // Check that this book is checked out by the user.
+            stmt = conn.prepareStatement("SELECT * FROM borrow WHERE libuid = ? AND callnum = ? AND copynum = ? AND ret IS NULL");
+            stmt.setString(1, userID);
+            stmt.setString(2, callnum);
+            stmt.setInt(3, copynum);
+            if (!stmt.executeQuery().next()) {
+                System.out.println("[Error] There is no checkout record for the information you provided.\n");
+                return;
+            }
+
+            // Update the record.
+            stmt = conn.prepareStatement("UPDATE borrow SET ret = ? WHERE libuid = ? AND callnum = ? AND copynum = ? AND ret IS NULL");
+            stmt.setDate(1, new Date(Calendar.getInstance().getTimeInMillis()));
+            stmt.setString(2, userID);
+            stmt.setString(3, callnum);
+            stmt.setInt(4, copynum);
+            stmt.execute();
+            System.out.println("Book returning performed successfully!!!\n");
+        } catch (SQLException e) {
+            System.out.println("[Error] Failed to return the book.\n");
+        }
+    }
+
+    // ====== Library Director Operations ======
+    public void listAllUnreturnedBooks(Calendar startDate, Calendar endDate) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT libuid, callnum, copynum, checkout FROM borrow WHERE checkout >= ? AND checkout <= ? AND ret IS NULL ORDER BY checkout DESC");
+            stmt.setDate(1, new Date(startDate.getTimeInMillis()));
+            stmt.setDate(2, new Date(endDate.getTimeInMillis()));
+            ResultSet rs = stmt.executeQuery();
+
+            System.out.println("|LibUID|CallNum|CopyNum|Checkout|");
+            while (rs.next()) {
+                String userID = rs.getString(1);
+                String callnum = rs.getString(2);
+                int copynum = rs.getInt(3);
+                Calendar checkout = Calendar.getInstance();
+                checkout.setTimeInMillis(rs.getDate(4).getTime());
+
+                // Print result.
+                System.out.println("|" + userID + "|" + callnum + "|" + copynum + "|" + DateConv.calToStr(checkout) + "|");
+            }
+            System.out.println("End of Query\n");
+        } catch (SQLException e) {
+            System.out.println("[Error] Failed to list the records.\n");
         }
     }
 }
